@@ -14,7 +14,6 @@ class _FilePickerPageState extends State<FilePickerPage> {
   late File file;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     filePick();
   }
@@ -70,7 +69,6 @@ class _FilePickerPageState extends State<FilePickerPage> {
 
   @override
   void dispose() async {
-    // TODO: implement dispose
     super.dispose();
     await Tflite.close();
   }
