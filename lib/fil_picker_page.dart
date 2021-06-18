@@ -11,7 +11,7 @@ class FilePickerPage extends StatefulWidget {
 }
 
 class _FilePickerPageState extends State<FilePickerPage> {
-  late File file;
+  File? file;
   @override
   void initState() {
     super.initState();
@@ -42,6 +42,7 @@ class _FilePickerPageState extends State<FilePickerPage> {
     FilePickerResult? _result = await FilePicker.platform.pickFiles();
     if (_result != null) {
       file = File(_result.files.single.path.toString());
+
       print(file);
       setState(() {});
       loadModel();
@@ -56,12 +57,14 @@ class _FilePickerPageState extends State<FilePickerPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Image.file(
-            file,
+          child: file != null ?
+          Image.file(
+            file!,
             height: height / 1.60,
             width: width,
             fit: BoxFit.cover,
-          ),
+          )
+              :Center(child: CircularProgressIndicator()),
         ),
       ),
     );

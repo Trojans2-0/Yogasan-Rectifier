@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:yogasan_rectifier/camera.dart';
 import 'package:yogasan_rectifier/fil_picker_page.dart';
+import 'package:camera/camera.dart';
+import 'dart:async';
 
+late List<CameraDescription> cameras;
 
-void main() => runApp(MyApp());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,14 +32,28 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: MaterialButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => FilePickerPage(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MaterialButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => FilePickerPage(),
+                  ),
+                ),
+                child: Text('Pick an Image'),
+                color: Colors.amber,
               ),
-            ),
-            child: Text('Pick an image'),
-            color: Colors.amber,
+              MaterialButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CameraApp(cameras),
+                  ),
+                ),
+                child: Text('Open Camera'),
+                color: Colors.amber,
+              ),
+            ],
           ),
         ),
       ),
