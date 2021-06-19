@@ -10,22 +10,12 @@ class CameraApp extends StatefulWidget {
 
 class _CameraAppState extends State<CameraApp> {
   late CameraController _controller;
-  XFile? imageFile;
-
-  Future<XFile?> take() async{
-    try {
-      XFile file = await _controller.takePicture();
-      return file;
-    } on CameraException catch (e) {
-      print(e);
-      return null;
-    }
-  }
+  
 
   @override
   void initState() {
     super.initState();
-    _controller = new CameraController(widget.cameras[0], ResolutionPreset.max);
+    _controller = new CameraController(widget.cameras[1], ResolutionPreset.max);
     _controller.initialize().then((_) {
       if (!mounted) {
         return;
@@ -45,19 +35,8 @@ class _CameraAppState extends State<CameraApp> {
     if (!_controller.value.isInitialized) {
       return new Container();
     }
-    return Scaffold(
-        body: Column(
-        children: <Widget>[
-         CameraPreview(_controller),
-         Container(
-           child: IconButton(
-             iconSize: 50,
-              icon: Icon(Icons.camera),
-              onPressed: () {
-               print(take());
-              },
-            )),
-      ],
-    ));
+    return  OverflowBox(
+        child: CameraPreview(_controller),
+    );
   }
 }

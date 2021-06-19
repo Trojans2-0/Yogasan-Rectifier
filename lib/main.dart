@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yogasan_rectifier/camera.dart';
 import 'package:yogasan_rectifier/fil_picker_page.dart';
 import 'package:camera/camera.dart';
 import 'dart:async';
+
+import 'package:yogasan_rectifier/redirect_cam.dart';
 
 late List<CameraDescription> cameras;
 
@@ -47,7 +48,7 @@ class HomePage extends StatelessWidget {
               MaterialButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => CameraApp(cameras),
+                    builder: (context) => RedirectCamera(cameras),
                   ),
                 ),
                 child: Text('Open Camera'),
