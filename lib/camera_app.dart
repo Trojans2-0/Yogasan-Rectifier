@@ -38,7 +38,7 @@ class _CameraAppState extends State<CameraApp> {
   void initState() {
     super.initState();
     loadModel();
-    _controller = new CameraController(widget.cameras[0], ResolutionPreset.max);
+    _controller = new CameraController(widget.cameras[1], ResolutionPreset.max);
     _controller.initialize().then(
       (_) {
         if (!mounted) {
@@ -77,60 +77,60 @@ class _CameraAppState extends State<CameraApp> {
                   map[path['part']] = Vector(path['x'], path['y']);
 
                   if (path['part'] == 'leftEye') {
-                    leftEye.x = path['x'] * 300;
-                    leftEye.y = path['y'] * 500;
+                    leftEye.x = path['x'] * img.width;
+                    leftEye.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightEye') {
-                    rightEye.x = path['x'] * 300;
-                    rightEye.y = path['y'] * 500;
+                    rightEye.x = path['x'] * img.width;
+                    rightEye.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftShoulder') {
-                    leftShoulder.x = path['x'] * 300;
-                    leftShoulder.y = path['y'] * 500;
+                    leftShoulder.x = path['x'] * img.width;
+                    leftShoulder.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightShoulder') {
-                    rightShoulder.x = path['x'] * 300;
-                    rightShoulder.y = path['y'] * 500;
+                    rightShoulder.x = path['x'] * img.width;
+                    rightShoulder.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftElbow') {
-                    leftElbow.x = path['x'] * 300;
-                    leftElbow.y = path['y'] * 500;
+                    leftElbow.x = path['x'] * img.width;
+                    leftElbow.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightElbow') {
-                    rightElbow.x = path['x'] * 300;
-                    rightElbow.y = path['y'] * 500;
+                    rightElbow.x = path['x'] * img.width;
+                    rightElbow.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftWrist') {
-                    leftWrist.x = path['x'] * 300;
-                    leftWrist.y = path['y'] * 500;
+                    leftWrist.x = path['x'] * img.width;
+                    leftWrist.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightWrist') {
-                    rightWrist.x = path['x'] * 300;
-                    rightWrist.y = path['y'] * 500;
+                    rightWrist.x = path['x'] * img.width;
+                    rightWrist.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftHip') {
-                    leftHip.x = path['x'] * 300;
-                    leftHip.y = path['y'] * 500;
+                    leftHip.x = path['x'] * img.width;
+                    leftHip.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightHip') {
-                    rightHip.x = path['x'] * 300;
-                    rightHip.y = path['y'] * 500;
+                    rightHip.x = path['x'] * img.width;
+                    rightHip.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftKnee') {
-                    leftKnee.x = path['x'] * 300;
-                    leftKnee.y = path['y'] * 500;
+                    leftKnee.x = path['x'] * img.width;
+                    leftKnee.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightKnee') {
-                    rightKnee.x = path['x'] * 300;
-                    rightKnee.y = path['y'] * 500;
+                    rightKnee.x = path['x'] * img.width;
+                    rightKnee.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'leftAnkle') {
-                    leftAnkle.x = path['x'] * 300;
-                    leftAnkle.y = path['y'] * 500;
+                    leftAnkle.x = path['x'] * img.width;
+                    leftAnkle.y = path['y'] * img.height;
                   }
                   if (path['part'] == 'rightAnkle') {
-                    rightAnkle.x = path['x'] * 300;
-                    rightAnkle.y = path['y'] * 500;
+                    rightAnkle.x = path['x'] * img.width;
+                    rightAnkle.y = path['y'] * img.height;
                   }
                 }
                 print('nose : ${map['nose'].x}');
@@ -172,19 +172,6 @@ class _CameraAppState extends State<CameraApp> {
       child: Stack(
         children: [
           CameraPreview(_controller),
-          for (var item in map.values)
-            Positioned(
-              left: item.x * 300,
-              top: item.y * 500,
-              child: Text(
-                '* ',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
           CustomPaint(
             painter: MyPainter(left: leftShoulder, right: rightShoulder),
           ),
