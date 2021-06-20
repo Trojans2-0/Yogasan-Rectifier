@@ -33,6 +33,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         child: Center(
@@ -51,7 +53,11 @@ class _HomePageState extends State<HomePage> {
               MaterialButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => RedirectCamera(cameras),
+                    builder: (context) => RedirectCamera(
+                      cameras: cameras,
+                      height: height,
+                      width: width,
+                    ),
                   ),
                 ),
                 child: Text('Choose from Camera'),

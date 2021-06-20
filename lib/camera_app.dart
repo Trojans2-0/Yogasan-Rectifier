@@ -4,7 +4,9 @@ import 'package:tflite/tflite.dart';
 
 class CameraApp extends StatefulWidget {
   final List<CameraDescription> cameras;
-  CameraApp(this.cameras);
+  final height;
+  final width;
+  CameraApp({required this.cameras, this.height, this.width});
   @override
   _CameraAppState createState() => _CameraAppState();
 }
@@ -68,78 +70,83 @@ class _CameraAppState extends State<CameraApp> {
                 print("Detection took ${endTime - startTime}");
                 recognitions = value;
                 print('recognitions : $recognitions');
+                try {
+                  int length = recognitions?[0]['keypoints'].length;
+                  print('recognitions : ${recognitions[0]['keypoints'][0]}');
+                  print('\n single rows ..');
+                  for (int i = 0; i < length; i++) {
+                    var path = recognitions[0]['keypoints'][i];
+                    map[path['part']] = Vector(path['x'], path['y']);
 
-                int length = recognitions![0]['keypoints'].length;
-                print('recognitions : ${recognitions[0]['keypoints'][0]}');
-                print('\n single rows ..');
-                for (int i = 0; i < length; i++) {
-                  var path = recognitions[0]['keypoints'][i];
-                  map[path['part']] = Vector(path['x'], path['y']);
+                    if (path['part'] == 'leftEye') {
+                      leftEye.x = path['x'] * widget.width;
+                      leftEye.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightEye') {
+                      rightEye.x = path['x'] * widget.width;
+                      rightEye.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftShoulder') {
+                      leftShoulder.x = path['x'] * widget.width;
+                      leftShoulder.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightShoulder') {
+                      rightShoulder.x = path['x'] * widget.width;
+                      rightShoulder.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftElbow') {
+                      leftElbow.x = path['x'] * widget.width;
+                      leftElbow.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightElbow') {
+                      rightElbow.x = path['x'] * widget.width;
+                      rightElbow.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftWrist') {
+                      leftWrist.x = path['x'] * widget.width;
+                      leftWrist.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightWrist') {
+                      rightWrist.x = path['x'] * widget.width;
+                      rightWrist.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftHip') {
+                      leftHip.x = path['x'] * widget.width;
+                      leftHip.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightHip') {
+                      rightHip.x = path['x'] * widget.width;
+                      rightHip.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftKnee') {
+                      leftKnee.x = path['x'] * widget.width;
+                      leftKnee.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightKnee') {
+                      rightKnee.x = path['x'] * widget.width;
+                      rightKnee.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'leftAnkle') {
+                      leftAnkle.x = path['x'] * widget.width;
+                      leftAnkle.y = path['y'] * widget.height;
+                    }
+                    if (path['part'] == 'rightAnkle') {
+                      rightAnkle.x = path['x'] * widget.width;
+                      rightAnkle.y = path['y'] * widget.height;
+                    }
+                  }
+                  print('nose : ${map['nose'].x}');
+                  setState(() {});
+                  for (var item in map.values) {
+                    print(item.x);
+                  }
 
-                  if (path['part'] == 'leftEye') {
-                    leftEye.x = path['x'] * img.width;
-                    leftEye.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightEye') {
-                    rightEye.x = path['x'] * img.width;
-                    rightEye.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftShoulder') {
-                    leftShoulder.x = path['x'] * img.width;
-                    leftShoulder.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightShoulder') {
-                    rightShoulder.x = path['x'] * img.width;
-                    rightShoulder.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftElbow') {
-                    leftElbow.x = path['x'] * img.width;
-                    leftElbow.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightElbow') {
-                    rightElbow.x = path['x'] * img.width;
-                    rightElbow.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftWrist') {
-                    leftWrist.x = path['x'] * img.width;
-                    leftWrist.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightWrist') {
-                    rightWrist.x = path['x'] * img.width;
-                    rightWrist.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftHip') {
-                    leftHip.x = path['x'] * img.width;
-                    leftHip.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightHip') {
-                    rightHip.x = path['x'] * img.width;
-                    rightHip.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftKnee') {
-                    leftKnee.x = path['x'] * img.width;
-                    leftKnee.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightKnee') {
-                    rightKnee.x = path['x'] * img.width;
-                    rightKnee.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'leftAnkle') {
-                    leftAnkle.x = path['x'] * img.width;
-                    leftAnkle.y = path['y'] * img.height;
-                  }
-                  if (path['part'] == 'rightAnkle') {
-                    rightAnkle.x = path['x'] * img.width;
-                    rightAnkle.y = path['y'] * img.height;
-                  }
+                  isDetecting = false;
+                } catch (e) {
+                  isDetecting = false;
+                  setState(() {});
+                  print(e);
                 }
-                print('nose : ${map['nose'].x}');
-                setState(() {});
-                for (var item in map.values) {
-                  print(item.x);
-                }
-
-                isDetecting = false;
               });
             }
           },
@@ -165,13 +172,31 @@ class _CameraAppState extends State<CameraApp> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     if (_controller == null || !_controller.value.isInitialized) {
       return Container();
     }
     return Container(
+      height: height,
+      width: width,
       child: Stack(
         children: [
           CameraPreview(_controller),
+          for (var item in map.values)
+            Positioned(
+              left: item.x * width,
+              top: item.y * height,
+              child: Text(
+                '* ',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           CustomPaint(
             painter: MyPainter(left: leftShoulder, right: rightShoulder),
           ),
