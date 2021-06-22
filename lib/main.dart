@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yogasan_rectifier/display.dart';
 import 'package:yogasan_rectifier/fil_picker_page.dart';
 import 'package:camera/camera.dart';
 import 'package:yogasan_rectifier/redirect_camea.dart';
@@ -44,15 +45,6 @@ class _HomePageState extends State<HomePage> {
               MaterialButton(
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => FilePickerPage(),
-                  ),
-                ),
-                child: Text('Pick an image'),
-                color: Colors.amber,
-              ),
-              MaterialButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
                     builder: (context) => RedirectCamera(
                       cameras: cameras,
                       height: height,
@@ -63,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                 child: Text('Choose from Camera'),
                 color: Colors.amber,
               ),
+              Display(),
             ],
           ),
         ),

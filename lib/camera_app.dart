@@ -40,124 +40,40 @@ class _CameraAppState extends State<CameraApp> {
   void initState() {
     super.initState();
     loadModel();
-    _controller = new CameraController(widget.cameras[1], ResolutionPreset.max);
+    _controller = new CameraController(widget.cameras[0], ResolutionPreset.max);
     _controller.initialize().then(
       (_) {
         if (!mounted) {
           return;
         }
         setState(() => {});
-
-        _controller.startImageStream(
-          (CameraImage img) {
-            if (!isDetecting) {
-              isDetecting = true;
-
-              int startTime = new DateTime.now().millisecondsSinceEpoch;
-
-              Tflite.runPoseNetOnFrame(
-                bytesList: img.planes.map((plane) {
-                  return plane.bytes;
-                }).toList(),
-                imageHeight: img.height,
-                imageWidth: img.width,
-                numResults: 1,
-                rotation: -90,
-                threshold: 0.1,
-                nmsRadius: 10,
-              ).then((value) {
-                int endTime = new DateTime.now().millisecondsSinceEpoch;
-                print("Detection took ${endTime - startTime}");
-                recognitions = value;
-                print('recognitions : $recognitions');
-                try {
-                  int length = recognitions?[0]['keypoints'].length;
-                  print('recognitions : ${recognitions[0]['keypoints'][0]}');
-                  print('\n single rows ..');
-                  for (int i = 0; i < length; i++) {
-                    var path = recognitions[0]['keypoints'][i];
-                    map[path['part']] = Vector(path['x'], path['y']);
-
-                    if (path['part'] == 'leftEye') {
-                      leftEye.x = path['x'] * widget.width;
-                      leftEye.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightEye') {
-                      rightEye.x = path['x'] * widget.width;
-                      rightEye.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftShoulder') {
-                      leftShoulder.x = path['x'] * widget.width;
-                      leftShoulder.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightShoulder') {
-                      rightShoulder.x = path['x'] * widget.width;
-                      rightShoulder.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftElbow') {
-                      leftElbow.x = path['x'] * widget.width;
-                      leftElbow.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightElbow') {
-                      rightElbow.x = path['x'] * widget.width;
-                      rightElbow.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftWrist') {
-                      leftWrist.x = path['x'] * widget.width;
-                      leftWrist.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightWrist') {
-                      rightWrist.x = path['x'] * widget.width;
-                      rightWrist.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftHip') {
-                      leftHip.x = path['x'] * widget.width;
-                      leftHip.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightHip') {
-                      rightHip.x = path['x'] * widget.width;
-                      rightHip.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftKnee') {
-                      leftKnee.x = path['x'] * widget.width;
-                      leftKnee.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightKnee') {
-                      rightKnee.x = path['x'] * widget.width;
-                      rightKnee.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'leftAnkle') {
-                      leftAnkle.x = path['x'] * widget.width;
-                      leftAnkle.y = path['y'] * widget.height;
-                    }
-                    if (path['part'] == 'rightAnkle') {
-                      rightAnkle.x = path['x'] * widget.width;
-                      rightAnkle.y = path['y'] * widget.height;
-                    }
-                  }
-                  print('nose : ${map['nose'].x}');
-                  setState(() {});
-                  for (var item in map.values) {
-                    print(item.x);
-                  }
-
-                  isDetecting = false;
-                } catch (e) {
-                  isDetecting = false;
-                  setState(() {});
-                  print(e);
-                }
-              });
-            }
-          },
-        );
+        _controller.startImageStream((img) async {
+          if (!isDetecting) {
+            isDetecting = true;
+          }
+          var recognitions = await Tflite.runModelOnFrame(
+              bytesList: img.planes.map((plane) {
+                return plane.bytes;
+              }).toList(),
+              imageHeight: img.height,
+              imageWidth: img.width,
+              imageMean: 127.5,
+              imageStd: 127.5,
+              rotation: 90,
+              numResults: 2,
+              threshold: 0.1,
+              asynch: true);
+          print(recognitions);
+        });
       },
     );
   }
 
   loadModel() async {
+    Tflite.close();
     var result = await Tflite.loadModel(
-      model: 'assets/posenet.tflite',
+      model: 'assets/mobilenet_v1_1.0_224.tflite',
+      labels: 'assets/mobilenet.txt',
       isAsset: true,
       numThreads: 1,
     );
@@ -175,7 +91,7 @@ class _CameraAppState extends State<CameraApp> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    if (_controller == null || !_controller.value.isInitialized) {
+    if (!_controller.value.isInitialized) {
       return Container();
     }
     return Container(
