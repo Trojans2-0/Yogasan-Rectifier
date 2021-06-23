@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yogasan_rectifier/camera_app.dart';
 import 'package:yogasan_rectifier/redirect_camea.dart';
+import 'package:yogasan_rectifier/second_page.dart';
 
 class GandhiTestWidget extends StatefulWidget {
   final cameras;
@@ -14,12 +15,14 @@ class GandhiTestWidget extends StatefulWidget {
 class _GandhiTestWidgetState extends State<GandhiTestWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  push(String s) {
+  push(String s, height, width) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => RedirectCamera(
+        builder: (context) => SecondPage(
           cameras: widget.cameras,
-          label: s,
+          title: s,
+          height: height,
+          width: width,
         ),
       ),
     );
@@ -34,9 +37,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: ListView(
             children: [
               Row(
                 mainAxisSize: MainAxisSize.max,
@@ -53,6 +54,9 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                     ),
                   )
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
               Expanded(
                 child: Container(
@@ -91,7 +95,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () => push('Adho Mukha Shvanasana'),
+                        onTap: () => push('Strengthen', height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF4D6CFB),
@@ -114,7 +118,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                                         padding:
                                             EdgeInsets.fromLTRB(0, 15, 0, 0),
                                         child: Text(
-                                          'Adho Mukha Shvanasana',
+                                          'Strengthen',
                                           style: GoogleFonts.montserrat(
                                             color: Color(0xFF15212B),
                                             fontSize: 18,
@@ -163,7 +167,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: ()=>push('Utkata Konasana'),
+                        onTap: () => push('Flexible', height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF72BEFF),
@@ -181,9 +185,10 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                                     Align(
                                       alignment: Alignment(-0.1, -0.5),
                                       child: Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 15, 0, 0),
                                         child: Text(
-                                          'Utkata Konasana',
+                                          'Flexible',
                                           textAlign: TextAlign.start,
                                           style: GoogleFonts.montserrat(
                                             color: Color(0xFF15212B),
@@ -232,7 +237,8 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: ()=>push('Kumbhakasana'),
+                        onTap: () =>
+                            push('Calm & Stress Relief', height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF72BEFF),
@@ -253,7 +259,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                                         padding:
                                             EdgeInsets.fromLTRB(0, 15, 0, 0),
                                         child: Text(
-                                          'Kumbhakasana',
+                                          'Calm & Stress Relief',
                                           style: GoogleFonts.montserrat(
                                             color: Color(0xFF15212B),
                                             fontSize: 18,
@@ -301,7 +307,8 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: ()=>push('Vrikshasana'),
+                        onTap: () =>
+                            push('Calm & Stress Relief', height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFFFF7B43),
@@ -319,9 +326,10 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                                     Align(
                                       alignment: Alignment(-0.1, -0.5),
                                       child: Padding(
-                                        padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 15, 0, 0),
                                         child: Text(
-                                          'Vrikshasana',
+                                          'Calm & Stress Relief',
                                           style: GoogleFonts.montserrat(
                                             color: Color(0xFF15212B),
                                             fontSize: 18,
@@ -361,7 +369,10 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                     ),
                   )
                 ],
-              )
+              ),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
