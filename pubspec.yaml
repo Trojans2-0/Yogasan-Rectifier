@@ -48,9 +48,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+<<<<<<< HEAD
     - assets/posenet.tflite
     - assets/gandhi.gif
     - assets/cartoon_yoga.jpg
+=======
+    - assets/labels.txt
+    - assets/model_unquant.tflite
+>>>>>>> dfd5fb10e5db3e41070f845ef5b53f5741218561
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
