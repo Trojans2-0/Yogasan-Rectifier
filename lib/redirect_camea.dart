@@ -20,6 +20,7 @@ class _RedirectCameraState extends State<RedirectCamera> {
           cameras: widget.cameras,
           height: widget.height,
           width: widget.width,
+          lable: 'Kumbhakasana',
         ),
       ],
     );
