@@ -40,7 +40,7 @@ class _CameraAppState extends State<CameraApp> {
   void initState() {
     super.initState();
     loadModel();
-    _controller = new CameraController(widget.cameras[1], ResolutionPreset.max);
+    _controller = new CameraController(widget.cameras[0], ResolutionPreset.max);
     _controller.initialize().then(
       (_) {
         if (!mounted) {
