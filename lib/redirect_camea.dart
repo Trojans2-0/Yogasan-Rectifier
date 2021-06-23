@@ -6,7 +6,8 @@ class RedirectCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
   final height;
   final width;
-  RedirectCamera({required this.cameras, this.height, this.width});
+  final label;
+  RedirectCamera({required this.cameras, this.height, this.width,this.label});
   @override
   _RedirectCameraState createState() => _RedirectCameraState();
 }
@@ -20,7 +21,7 @@ class _RedirectCameraState extends State<RedirectCamera> {
           cameras: widget.cameras,
           height: widget.height,
           width: widget.width,
-          lable: 'Kumbhakasana',
+          lable: widget.label.toString(),
         ),
       ],
     );
