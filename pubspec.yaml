@@ -27,6 +27,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   file_picker: ^3.0.2+2
   tflite: ^1.1.2
+  font_awesome_flutter: ^9.1.0
+  google_fonts: ^2.1.0
+  page_transition: ^2.0.2
+  cached_network_image: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +48,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+<<<<<<< HEAD
     - assets/posenet.tflite
+    - assets/gandhi.gif
+    - assets/cartoon_yoga.jpg
+=======
+    - assets/labels.txt
+    - assets/model_unquant.tflite
+>>>>>>> dfd5fb10e5db3e41070f845ef5b53f5741218561
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
