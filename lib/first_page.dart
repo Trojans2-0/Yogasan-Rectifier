@@ -22,11 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
             alignment: Alignment(0, -0.5),
             child: Text(
-              "Yoga Rectifier",
-              style: GoogleFonts.podkova(
+              "Yogasan Rectifier",
+              style: GoogleFonts.dancingScript(
                 color: Colors.white,
                 fontSize: 45,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.normal,
               ),
             ),
           ),

@@ -19,7 +19,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
   late TimeOfDay time;
   late TimeOfDay? pickedTime;
 
-  push(String s, Color color ,height, width) {
+  push(String s, Color color, height, width) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SecondPage(
@@ -387,8 +387,8 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () => push('Calm & Stress Relief',
-                            Color(0xFF3ed04b), height, width),
+                        onTap: () => push(
+                            'Hair & Skin', Color(0xFF3ed04b), height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF3ed04b),

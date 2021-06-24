@@ -23,8 +23,11 @@ class _SecondPageState extends State<SecondPage> {
   final pageViewController = PageController();
 
   String url = 'https://www.youtube.com/watch?v=_8kV4FHSdNA';
+  String url1 = 'https://www.youtube.com/watch?v=FN355X3thuY';
+  String url2 = 'https://www.youtube.com/watch?v=YoSuVws4OTQ';
+  String url3 = 'https://www.youtube.com/watch?v=U4g7OReAY2Q';
 
-  runYoutubePlayer() {
+  runYoutubePlayer(url) {
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!.toString(),
       flags: YoutubePlayerFlags(
@@ -37,7 +40,18 @@ class _SecondPageState extends State<SecondPage> {
 
   @override
   void initState() {
-    runYoutubePlayer();
+    if (widget.title == 'Strengthen') {
+      runYoutubePlayer(url);
+    }
+    if (widget.title == 'Flexible') {
+      runYoutubePlayer(url1);
+    }
+    if (widget.title == 'Calm & Stress Relief') {
+      runYoutubePlayer(url2);
+    }
+    if (widget.title == 'Hair & Skin') {
+      runYoutubePlayer(url3);
+    }
     super.initState();
   }
 
@@ -335,7 +349,7 @@ class _SecondPageState extends State<SecondPage> {
                           ],
                         ),
                         Align(
-                          alignment: Alignment(0, 1.1),
+                          alignment: Alignment(0, 1),
                           child: SmoothPageIndicator(
                             controller: pageViewController,
                             count: 5,

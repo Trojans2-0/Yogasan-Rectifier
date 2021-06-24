@@ -5,7 +5,7 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
    <application
         android:label="yogasan_rectifier"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/app_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

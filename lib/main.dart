@@ -12,7 +12,6 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       darkTheme: ThemeData(
-        primaryColor: Colors.black,
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.dark,
