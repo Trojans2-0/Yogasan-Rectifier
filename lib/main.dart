@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // import 'package:yogasan_rectifier/fil_picker_page.dart';
 import 'package:camera/camera.dart';
 import 'package:yogasan_rectifier/first_page.dart';
+
+import 'notifications.dart';
 // import 'package:yogasan_rectifier/redirect_camea.dart';
 
 late List<CameraDescription> cameras;
@@ -92,6 +94,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // body: NotificationsPage(),
       body: HomeScreen(
         cameras: widget.cameras,
       ),

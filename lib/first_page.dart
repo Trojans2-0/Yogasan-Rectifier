@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Color(0xFFE07B7B),
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
-                          )),
+                          ),),
                     )
                   ],
                 ),
