@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yogasan_rectifier/second_page.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class GandhiTestWidget extends StatefulWidget {
   final cameras;
@@ -11,9 +12,14 @@ class GandhiTestWidget extends StatefulWidget {
 }
 
 class _GandhiTestWidgetState extends State<GandhiTestWidget> {
+  late FlutterLocalNotificationsPlugin plugin;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  push(String s, Color color, height, width) {
+  late TimeOfDay time;
+  late TimeOfDay? pickedTime;
+
+  push(String s, Color color ,height, width) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SecondPage(
@@ -23,6 +29,62 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
           height: height,
           width: width,
         ),
+      ),
+    );
+  }
+
+  _showNotification(scheduledTime) async {
+    var androidDetails = new AndroidNotificationDetails(
+      'Channel ID',
+      'Yogasan Rectifier',
+      'Reminder to stretch your muscles',
+      importance: Importance.max,
+    );
+    var iosDetails = new IOSNotificationDetails();
+    var generalNotificationDetails =
+        new NotificationDetails(android: androidDetails, iOS: iosDetails);
+
+    print('Scheduled Time : $scheduledTime');
+
+    plugin.schedule(1, 'Reminder', 'Time to stretch your muscles',
+        scheduledTime, generalNotificationDetails);
+  }
+
+  Future<Null> timePicker(BuildContext context) async {
+    time = TimeOfDay.now();
+    pickedTime = await showTimePicker(
+      context: context,
+      initialTime: time,
+    );
+    if (pickedTime != null) {
+      time = pickedTime!;
+    }
+    print('time picked : ${time.hour}:${time.minute}}');
+    var now = DateTime.now();
+    var dateTime =
+        DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    print('Date Time : $dateTime');
+    _showNotification(dateTime);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var androidInit = new AndroidInitializationSettings('app_icon');
+    var iosInit = new IOSInitializationSettings();
+    var initializationSettings =
+        new InitializationSettings(android: androidInit, iOS: iosInit);
+    plugin = new FlutterLocalNotificationsPlugin();
+    plugin.initialize(initializationSettings,
+        onSelectNotification: notificationSelected);
+  }
+
+  Future notificationSelected(String? data) async {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text('Flutter Notification'),
       ),
     );
   }
@@ -39,10 +101,14 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
           child: ListView(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    padding: EdgeInsets.only(
+                      top: 10,
+                      left: 15,
+                    ),
                     child: Text(
                       'Welcome User,',
                       style: GoogleFonts.montserrat(
@@ -51,11 +117,24 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: 10,
+                      right: 15,
+                    ),
+                    child: IconButton(
+                      onPressed: () => timePicker(context),
+                      color: Colors.amber,
+                      icon: Icon(
+                        Icons.timer,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Container(
                 width: double.infinity,
@@ -78,6 +157,9 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,

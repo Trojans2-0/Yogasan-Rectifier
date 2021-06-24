@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // body: NotificationsPage(),
       body: HomeScreen(
         cameras: widget.cameras,
       ),
