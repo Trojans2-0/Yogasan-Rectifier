@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 
 class CameraApp extends StatefulWidget {
@@ -14,7 +13,6 @@ class CameraApp extends StatefulWidget {
 }
 
 class _CameraAppState extends State<CameraApp> {
-
   late CameraController _controller;
   bool isDetecting = false;
   var recognitions;
@@ -25,6 +23,7 @@ class _CameraAppState extends State<CameraApp> {
   String lable = 'Pose not correct';
 
   double score = 0.0;
+  
 
   @override
   void initState() {
@@ -115,7 +114,7 @@ class _CameraAppState extends State<CameraApp> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    if (_controller == null || !_controller.value.isInitialized) {
+    if (!_controller.value.isInitialized) {
       return Container();
     }
     return Scaffold(

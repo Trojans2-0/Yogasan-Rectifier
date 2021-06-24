@@ -31,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 60,
             child: Card(
               child: MaterialButton(
+                color: Colors.white,
+                elevation: 10.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
                 onPressed: () async {
                   await Navigator.push(
                     context,

@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yogasan_rectifier/camera_app.dart';
-import 'package:yogasan_rectifier/redirect_camea.dart';
 import 'package:yogasan_rectifier/second_page.dart';
 
 class GandhiTestWidget extends StatefulWidget {
@@ -15,12 +13,13 @@ class GandhiTestWidget extends StatefulWidget {
 class _GandhiTestWidgetState extends State<GandhiTestWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  push(String s, height, width) {
+  push(String s, Color color, height, width) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SecondPage(
           cameras: widget.cameras,
           title: s,
+          color: color,
           height: height,
           width: width,
         ),
@@ -93,16 +92,16 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () => push('Strengthen', height, width),
+                        onTap: () => push(
+                            'Strengthen', Color(0xFFFF7B43), height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: Color(0xFF4D6CFB),
+                          color: Color(0xFFFF7B43),
                           elevation: 2,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Row(
-                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -165,7 +164,8 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () => push('Flexible', height, width),
+                        onTap: () =>
+                            push('Flexible', Color(0xFF72BEFF), height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF72BEFF),
@@ -235,8 +235,8 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () =>
-                            push('Calm & Stress Relief', height, width),
+                        onTap: () => push('Calm & Stress Relief',
+                            Color(0xFF72BEFF), height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: Color(0xFF72BEFF),
@@ -305,11 +305,11 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: GestureDetector(
-                        onTap: () =>
-                            push('Calm & Stress Relief', height, width),
+                        onTap: () => push('Calm & Stress Relief',
+                            Color(0xFF3ed04b), height, width),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: Color(0xFFFF7B43),
+                          color: Color(0xFF3ed04b),
                           elevation: 2,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -327,7 +327,7 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
                                         padding:
                                             EdgeInsets.fromLTRB(0, 15, 0, 0),
                                         child: Text(
-                                          'Calm & Stress Relief',
+                                          'Hair & Skin',
                                           style: GoogleFonts.montserrat(
                                             color: Color(0xFF15212B),
                                             fontSize: 18,

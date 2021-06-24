@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-// import 'package:yogasan_rectifier/fil_picker_page.dart';
 import 'package:camera/camera.dart';
 import 'package:yogasan_rectifier/first_page.dart';
-// import 'package:yogasan_rectifier/redirect_camea.dart';
 
 late List<CameraDescription> cameras;
 
@@ -14,6 +12,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       darkTheme: ThemeData(
+        primaryColor: Colors.black,
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.dark,
@@ -36,7 +35,6 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Timer(
       Duration(seconds: 1),

@@ -34,7 +34,6 @@ class _FilePickerPageState extends State<FilePickerPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     filePick();
     loadModel();
@@ -60,6 +59,8 @@ class _FilePickerPageState extends State<FilePickerPage> {
     var recognitions = await Tflite.runPoseNetOnImage(
       path: path,
     );
+    print(path1);
+    print(path2);
     int length = recognitions![0]['keypoints'].length;
     print('recognitions : ${recognitions[0]['keypoints'][0]}');
     print('\n single rows ..');
@@ -142,8 +143,6 @@ class _FilePickerPageState extends State<FilePickerPage> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -215,7 +214,6 @@ class _FilePickerPageState extends State<FilePickerPage> {
 
   @override
   void dispose() async {
-    // TODO: implement dispose
     super.dispose();
     await Tflite.close();
   }
