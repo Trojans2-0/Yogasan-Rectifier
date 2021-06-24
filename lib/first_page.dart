@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
               alignment: Alignment(0, 0),
               child: Image.asset(
-                'assets/cartoon_yoga.jpg',
+                'assets/cartoon_yoga.png',
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 1,
               )),
@@ -38,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       type: PageTransitionType.bottomToTop,
                       duration: Duration(milliseconds: 10),
                       reverseDuration: Duration(milliseconds: 10),
-                      child: GandhiTestWidget(cameras: widget.cameras,),
+                      child: GandhiTestWidget(
+                        cameras: widget.cameras,
+                      ),
                     ),
                   );
                 },

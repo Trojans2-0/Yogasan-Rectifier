@@ -58,25 +58,23 @@ class _GandhiTestWidgetState extends State<GandhiTestWidget> {
               SizedBox(
                 height: 20,
               ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: Align(
-                    alignment: Alignment(0, 0),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(1200),
-                        child: Image.asset(
-                          'assets/gandhi.gif',
-                          width: 250,
-                          height: 300,
-                          fit: BoxFit.cover,
-                        ),
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                child: Align(
+                  alignment: Alignment(0, 0),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(1200),
+                      child: Image.asset(
+                        'assets/gandhi.gif',
+                        width: 250,
+                        height: 300,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
