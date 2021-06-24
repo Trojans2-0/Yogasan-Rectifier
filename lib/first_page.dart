@@ -20,6 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Align(
+            alignment: Alignment(0, -0.5),
+            child: Text(
+              "Yoga Rectifier",
+              style: GoogleFonts.podkova(
+                color: Colors.white,
+                fontSize: 45,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Align(
               alignment: Alignment(0, 0),
               child: Image.asset(
                 'assets/cartoon_yoga.png',
@@ -58,12 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text('Sign in with Google',
-                          style: GoogleFonts.roboto(
-                            color: Color(0xFFE07B7B),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                          ),),
+                      child: Text(
+                        'Sign in with Google',
+                        style: GoogleFonts.roboto(
+                          color: Color(0xFFE07B7B),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
+                      ),
                     )
                   ],
                 ),
